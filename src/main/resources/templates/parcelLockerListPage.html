@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.orf">
+<head>
+    <meta charset="UTF-8">
+    <title>Parcel Locker List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+<div class="container my-5">
+
+    <h1>Parcel Locker List</h1>
+    <a th:href="@{/addParcelLocker}" class="btn btn-primary">New Parcel Locker</a>
+    <p></p>
+    <table style="width:1200px" class="table table-striped table-hover table-bordered border-primary">
+        <thead class="table-dark">
+        <tr style="text-align: center; vertical-align: middle">
+            <th style="width:90px">ID</th>
+            <th style="width:190px">Name</th>
+            <th style="width:200px">Street</th>
+            <th style="width:195px">City</th>
+            <th style="width:70px">Post Code</th>
+            <th style="width:85px">Status</br>Small</br>Box</th>
+            <th style="width:85px">Status</br>Medium</br>Box</th>
+            <th style="width:85px">Status</br>Big</br>Box</th>
+            <th style="width:200px">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="parcelLocker : ${parcelLockerList}">
+            <td th:text="${parcelLocker.id}"></td>
+            <td th:text="${parcelLocker.name}"></td>
+            <td th:text="${parcelLocker.street}"></td>
+            <td th:text="${parcelLocker.city}"></td>
+            <td th:text="${parcelLocker.postCode}"></td>
+            <td th:text="${parcelLocker.smallBoxStatus} + '/' + ${parcelLocker.smallBoxCapacity}"></td>
+            <td th:text="${parcelLocker.mediumBoxStatus} + '/' + ${parcelLocker.mediumBoxCapacity}"></td>
+            <td th:text="${parcelLocker.bigBoxStatus} + '/' + ${parcelLocker.bigBoxCapacity}"></td>
+            <td>
+                <a style="width:85px" th:href="@{/updateParcelLocker/{id}(id=${parcelLocker.id})}" class="btn btn-primary">Update</a>
+                <a style="width:85px" th:href="@{/deleteParcelLocker/{id}(id=${parcelLocker.id})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
