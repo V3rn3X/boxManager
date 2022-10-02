@@ -7,7 +7,7 @@
           integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 <body>
-<div  class="container">
+<div class="container">
     <h1>Add Parcel Locker</h1>
 
     <form th:action="@{/saveParcelLocker}" th:object="${parcelLocker}" method="post">
@@ -49,14 +49,16 @@
 
         <div>
             <label for="small">Small Box Capacity</label>
-            <span th:if="${#fields.hasErrors('smallBoxCapacity')}" class="text-danger">Provide number between 0-999</span>
+            <span th:if="${#fields.hasErrors('smallBoxCapacity')}"
+                  class="text-danger">Provide number between 0-999</span>
             <input style="width:200px" type="text" th:field="*{smallBoxCapacity}" placeholder="0-999"
                    id="small" class="form-control mb-4 col-4">
         </div>
 
         <div>
             <label for="medium">Medium Box Capacity</label>
-            <span th:if="${#fields.hasErrors('mediumBoxCapacity')}" class="text-danger">Provide number between 0-999</span>
+            <span th:if="${#fields.hasErrors('mediumBoxCapacity')}"
+                  class="text-danger">Provide number between 0-999</span>
             <input style="width:200px" type="text" th:field="*{mediumBoxCapacity}" placeholder="0-999"
                    id="medium" class="form-control mb-4 col-4">
         </div>

@@ -1,7 +1,7 @@
-package com.sda.outpost.service;
+package com.outpost.service;
 
-import com.sda.outpost.domain.ParcelLocker;
-import com.sda.outpost.repository.ParcelLockerRepository;
+import com.outpost.domain.ParcelLocker;
+import com.outpost.repository.ParcelLockerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,29 +14,29 @@ public class ParcelLockerService {
 
     private final ParcelLockerRepository repository;
 
-    public List<ParcelLocker> getAllParcelLocker(){
+    public List<ParcelLocker> getAllParcelLocker() {
         return repository.findAll();
     }
 
-    public void addParcelLocker(ParcelLocker parcelLocker){
+    public void addParcelLocker(ParcelLocker parcelLocker) {
         repository.save(parcelLocker);
     }
 
-    public ParcelLocker getParcelLockerById(String id){
+    public ParcelLocker getParcelLockerById(String id) {
         Optional<ParcelLocker> optional = repository.findById(id);
-        ParcelLocker parcelLocker = null;
-        if(optional.isPresent()) {
+        ParcelLocker parcelLocker;
+        if (optional.isPresent()) {
             parcelLocker = optional.get();
-        } else{
+        } else {
             throw new RuntimeException("Employee not found for id :: " + id);
         }
         return parcelLocker;
-        }
-
-        public void deleteParcelLockerById(String id){
-        repository.deleteById(id);
-        }
-
     }
+
+    public void deleteParcelLockerById(String id) {
+        repository.deleteById(id);
+    }
+
+}
 
 

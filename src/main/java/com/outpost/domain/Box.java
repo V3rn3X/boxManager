@@ -1,4 +1,4 @@
-package com.sda.outpost.domain;
+package com.outpost.domain;
 
 import org.hibernate.annotations.Type;
 
@@ -12,7 +12,7 @@ public class Box {
 
     @Id
     @GeneratedValue
-    @Type(type="uuid-char")
+    @Type(type = "uuid-char")
     private UUID id;
 
 

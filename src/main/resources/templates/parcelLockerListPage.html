@@ -37,8 +37,10 @@
             <td th:text="${parcelLocker.mediumBoxStatus} + '/' + ${parcelLocker.mediumBoxCapacity}"></td>
             <td th:text="${parcelLocker.bigBoxStatus} + '/' + ${parcelLocker.bigBoxCapacity}"></td>
             <td>
-                <a style="width:85px" th:href="@{/updateParcelLocker/{id}(id=${parcelLocker.id})}" class="btn btn-primary">Update</a>
-                <a style="width:85px" th:href="@{/deleteParcelLocker/{id}(id=${parcelLocker.id})}" class="btn btn-danger">Delete</a>
+                <a style="width:85px" th:href="@{/updateParcelLocker/{id}(id=${parcelLocker.id})}"
+                   class="btn btn-primary">Update</a>
+                <a style="width:85px" th:href="@{/deleteParcelLocker/{id}(id=${parcelLocker.id})}"
+                   class="btn btn-danger">Delete</a>
             </td>
         </tr>
         </tbody>

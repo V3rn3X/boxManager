@@ -1,22 +1,21 @@
-package com.sda.outpost.domain;
+package com.outpost.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.*;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Parcel_Lockers")
 public class ParcelLocker {
 
     @Id
-    @Pattern(regexp="^([0-9]{3}[A-Z]{3})$", message="example 000KAT")
+    @Pattern(regexp = "^([0-9]{3}[A-Z]{3})$", message = "example 000KAT")
     private String id;
 
     @NotNull(message = "Name cannot be empty")
@@ -32,7 +31,7 @@ public class ParcelLocker {
     private String city;
 
     @NotNull(message = "Post code cannot be empty")
-    @Pattern(regexp="^([0-9]{2})-([0-9]{3})$", message="example 00-000")
+    @Pattern(regexp = "^([0-9]{2})-([0-9]{3})$", message = "example 00-000")
     private String postCode;
 
     @NotNull(message = "Capacity cannot be empty")
