@@ -1,12 +1,15 @@
-package com.outpost.domain;
+package com.outpost.parcelLocker;
 
+import com.outpost.box.Box;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -53,12 +56,14 @@ public class ParcelLocker {
     private Integer smallBoxStatus = 0;
 
     @NotNull(message = "Status cannot be empty")
-
     private Integer mediumBoxStatus = 0;
 
     @NotNull(message = "Status cannot be empty")
-
     private Integer bigBoxStatus = 0;
 
+    @OneToMany(mappedBy = "senderParcelLocker")
+    private Set<Box> senderBoxes;
 
+    @OneToMany(mappedBy = "recipientParcelLocker")
+    private Set<Box> recipientBoxes;
 }

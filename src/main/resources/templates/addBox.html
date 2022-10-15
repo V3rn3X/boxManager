@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Parcel Locker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1>Add Box</h1>
+
+    <form th:action="@{/saveBox}" th:object="${box}" method="post">
+
+        <span >
+            <input type="hidden" th:value="${box.id}" />
+        </span>
+
+        <div>
+            <label for="sizeBox">Size Box</label>
+            <select style="width:200px" th:field="*{sizeBox}" class="form-control mb-4 col-4" id="sizeBox">
+                <option th:value="'SMALL'" th:text="Small"></option>
+                <option th:value="'MEDIUM'" th:text="Medium"></option>
+                <option th:value="'BIG'" th:text="Big"></option>
+            </select>
+        </div>
+
+        <div>
+            <label for="weight">Weight Box</label>
+            <span th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"
+                  class="text-danger">Provide number between 0-999</span>
+            <input style="width:200px" type="text" th:field="*{weight}" placeholder="0-999"
+                   id="weight" class="form-control mb-4 col-4">
+        </div>
+
+        <div>
+            <label for="sender">Sender</label>
+            <span th:if="${#fields.hasErrors('sender')}" th:errors="*{sender}" class="text-danger"></span>
+            <input style="width:200px" type="text" th:field="*{sender}" placeholder="example: Name Lastname"
+                   id="sender" class="form-control mb-4 col-4">
+        </div>
+
+        <div>
+            <label for="recipient">Recipient</label>
+            <span th:if="${#fields.hasErrors('recipient')}" th:errors="*{recipient}" class="text-danger"></span>
+            <input style="width:200px" type="text" th:field="*{recipient}" placeholder="example: Name Lastname"
+                   id="recipient" class="form-control mb-4 col-4">
+        </div>
+
+        <div>
+            <label for="senderParcelLocker">Sender Parcel Locker</label>
+            <select style="width:200px" th:field="*{senderParcelLocker}"
+                    id="senderParcelLocker" class="form-control mb-4 col-4">
+                <option th:each="parcelLocker: ${senderParcelLockerList}" th:value="${parcelLocker.id}"
+                        th:utext="${parcelLocker.id}"></option>
+            </select>
+        </div>
+
+        <div>
+            <label for="recipientParcelLocker">Recipient Parcel Locker</label>
+            <select style="width:200px" th:field="*{recipientParcelLocker}"
+                    id="recipientParcelLocker" class="form-control mb-4 col-4">
+                <option th:each="parcelLocker: ${recipientParcelLockerList}" th:value="${parcelLocker.id}"
+                        th:utext="${parcelLocker.id}"></option>
+            </select>
+        </div>
+
+        <div type="hidden">
+            <label for="status">Status</label>
+            <select style="width:200px" th:field="*{status}" class="form-control mb-4 col-4" id="status">
+                <option th:value="'PREPARED'" th:text="PREPARED"></option>
+            </select>
+        </div>
+
+
+        <button style="width:200px" type="submit" class="btn btn-success col-2">Save Box</button>
+
+    </form>
+    </br>
+    <a style="width:200px" th:href="@{/boxlist}" class="btn btn-warning">Cancel</a>
+</div>
+</body>
+</html>

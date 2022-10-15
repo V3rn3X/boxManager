@@ -1,12 +1,9 @@
-package com.outpost.service;
+package com.outpost.parcelLocker;
 
-import com.outpost.domain.ParcelLocker;
-import com.outpost.repository.ParcelLockerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,14 +20,7 @@ public class ParcelLockerService {
     }
 
     public ParcelLocker getParcelLockerById(String id) {
-        Optional<ParcelLocker> optional = repository.findById(id);
-        ParcelLocker parcelLocker;
-        if (optional.isPresent()) {
-            parcelLocker = optional.get();
-        } else {
-            throw new RuntimeException("Employee not found for id :: " + id);
-        }
-        return parcelLocker;
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found for id :: "  + id));
     }
 
     public void deleteParcelLockerById(String id) {
