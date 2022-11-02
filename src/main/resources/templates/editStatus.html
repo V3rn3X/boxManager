@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:text-align="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Parcel Locker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+<div th:insert="fragments/navbar :: navbar"></div>
+
+<div class="container">
+    <h1>Edit Status Box</h1>
+
+    <form th:action="@{/editStatusBox}" th:object="${box}" method="post">
+
+        <hr>
+        <input type="hidden" style="width:200px" th:field="*{id}"
+               id="id" class="form-control mb-4 col-4">
+        <select hidden style="width:200px" th:field="*{sizeBox}" class="form-control mb-4 col-4" id="sizeBox">
+            <option th:value="'SMALL'" th:text="Small"></option>
+            <option th:value="'MEDIUM'" th:text="Medium"></option>
+            <option th:value="'BIG'" th:text="Big"></option>
+        </select>
+        <input style="width:200px" type="hidden" th:field="*{weight}" placeholder="0-999"
+               id="weight" class="form-control mb-4 col-4">
+        <input style="width:200px" type="hidden" th:field="*{sender}" placeholder="example: Name Lastname"
+               id="sender" class="form-control mb-4 col-4">
+        <input style="width:200px" type="hidden" th:field="*{recipient}" placeholder="example: Name Lastname"
+               id="recipient" class="form-control mb-4 col-4">
+        <select hidden style="width:200px" th:field="*{senderParcelLocker}"
+                id="senderParcelLocker" class="form-control mb-4 col-4">
+            <option th:each="parcelLocker: ${senderParcelLockerList}" th:value="${parcelLocker.id}"
+                    th:utext="${parcelLocker.id}"></option>
+        </select>
+        <select hidden style="width:200px" th:field="*{recipientParcelLocker}"
+                id="recipientParcelLocker" class="form-control mb-4 col-4">
+            <option th:each="parcelLocker: ${recipientParcelLockerList}" th:value="${parcelLocker.id}"
+                    th:utext="${parcelLocker.id}"></option>
+        </select>
+        <select hidden style="width:200px" th:field="*{status}" class="form-control mb-4 col-4" id="status">
+            <option th:value="${box.getStatus()}" th:text="${box.getStatus()}"></option>
+        </select>
+
+        <div style="text-align:center">
+
+
+
+        <span th:if="${box.getStatus() == T(com.outpost.box.Status).PREPARED}">
+        <img src="https://i.postimg.cc/qvbyYkJv/PREPARED.png" width="150" height="150">
+        </span>
+        <span th:unless="${box.getStatus() == T(com.outpost.box.Status).PREPARED}">
+        <img src="https://i.postimg.cc/76QRZvnH/PREPARED-GRAY.png" width="150" height="150">
+        </span>
+
+        <span th:unless="${box.getStatus() == T(com.outpost.box.Status).PLACED_IN_SENDER_PARCEL_LOCKER}">
+        <img src="https://i.postimg.cc/wxwN3qNc/PLACED-IN-SENDER-PARCEL-LOCKER-GRAY.png" width="150" height="150">
+        </span>
+        <span th:if="${box.getStatus() == T(com.outpost.box.Status).PLACED_IN_SENDER_PARCEL_LOCKER}">
+        <img src="https://i.postimg.cc/VNJnP3vB/PLACED-IN-SENDER-PARCEL-LOCKER.png" width="150" height="150">
+        </span>
+
+        <span th:unless="${box.getStatus() == T(com.outpost.box.Status).JOURNEY_TO_CENTRAL}">
+        <img src="https://i.postimg.cc/DwqRdMn6/JOURNEY-TO-CENTRAL-GRAY.png" width="150" height="150">
+        </span>
+        <span th:if="${box.getStatus() == T(com.outpost.box.Status).JOURNEY_TO_CENTRAL}">
+        <img src="https://i.postimg.cc/DycqrrRs/JOURNEY-TO-CENTRAL.png" width="150" height="150">
+        </span>
+
+        <span th:unless="${box.getStatus() == T(com.outpost.box.Status).CENTRAL}">
+        <img src="https://i.postimg.cc/MZLkWB97/CENTRAL-GRAY.png" width="150" height="150">
+        </span>
+        <span th:if="${box.getStatus() == T(com.outpost.box.Status).CENTRAL}">
+        <img src="https://i.postimg.cc/XNdKJS8s/CENTRAL.png" width="150" height="150">
+        </span>
+
+        <span th:unless="${box.getStatus() == T(com.outpost.box.Status).JOURNEY_TO_RECIPIENT_PARCEL_LOCKER}">
+        <img src="https://i.postimg.cc/qvf9KTVg/JOURNEY-TO-RECIPIENT-PARCEL-LOCKER-GRAY.png" width="150" height="150">
+        </span>
+        <span th:if="${box.getStatus() == T(com.outpost.box.Status).JOURNEY_TO_RECIPIENT_PARCEL_LOCKER}">
+        <img src="https://i.postimg.cc/bwN13Gj5/JOURNEY-TO-RECIPIENT-PARCEL-LOCKER.png" width="150" height="150">
+        </span>
+
+        <span th:unless="${box.getStatus() == T(com.outpost.box.Status).PLACED_IN_RECIPIENT_PARCEL_LOCKER}">
+        <img src="https://i.postimg.cc/JhMvT5hL/PLACED-IN-RECIPIENT-PARCEL-LOCKER-GRAY.png" width="150" height="150">
+        </span>
+        <span th:if="${box.getStatus() == T(com.outpost.box.Status).PLACED_IN_RECIPIENT_PARCEL_LOCKER}">
+        <img src="https://i.postimg.cc/tTX1CwCM/PLACED-IN-RECIPIENT-PARCEL-LOCKER.png" width="150" height="150">
+        </span>
+
+        <span th:unless="${box.getStatus() == T(com.outpost.box.Status).DELIVERED}">
+        <img src="https://i.postimg.cc/4NHDn30r/DELIVERED-GRAY.png" width="150" height="150">
+        </span>
+        <span th:if="${box.getStatus() == T(com.outpost.box.Status).DELIVERED}">
+        <img src="https://i.postimg.cc/gkpVLStm/DELIVERED.png" width="150" height="150">
+        </span>
+        <hr>
+        <p><h1>Actual Status: <span th:text="${box.getStatus()}"></span></h1></p>
+
+        <button style="width:200px" type="submit" class="btn btn-success col-2">Next Status</button>
+        <a style="width:200px" th:href="@{/boxlist}" class="btn btn-warning">Return</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

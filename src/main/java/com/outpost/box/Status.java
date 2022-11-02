@@ -9,4 +9,13 @@ public enum Status {
     JOURNEY_TO_RECIPIENT_PARCEL_LOCKER,
     PLACED_IN_RECIPIENT_PARCEL_LOCKER,
     DELIVERED;
+
+    public Status getNext() {
+        Status[] e = Status.values();
+        int i = 0;
+        for (; e[i] != this; i++);
+        i++;
+        i %= e.length;
+        return e[i];
+    }
 }

@@ -7,6 +7,8 @@
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 <body>
+<div th:insert="fragments/navbar :: navbar"></div>
+
 <div class="container my-5">
 
   <h1>Box List</h1>
@@ -42,6 +44,8 @@
            class="btn btn-primary">Update</a>
         <a style="width:85px" th:href="@{/deleteBox/{id}(id=${box.id})}"
            class="btn btn-danger">Delete</a>
+        <a style="width:85px" th:href="@{/editStatusBox/{id}(id=${box.id})}"
+           class="btn btn-danger">Status</a>
       </td>
     </tr>
     </tbody>

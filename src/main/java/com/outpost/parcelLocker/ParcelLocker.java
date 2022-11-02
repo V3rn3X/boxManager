@@ -1,18 +1,17 @@
 package com.outpost.parcelLocker;
 
 import com.outpost.box.Box;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParcelLocker {
@@ -62,8 +61,13 @@ public class ParcelLocker {
     private Integer bigBoxStatus = 0;
 
     @OneToMany(mappedBy = "senderParcelLocker")
-    private Set<Box> senderBoxes;
+    private List<Box> senderBoxes;
 
     @OneToMany(mappedBy = "recipientParcelLocker")
-    private Set<Box> recipientBoxes;
+    private List<Box> recipientBoxes;
+
+
+
+
+
 }
